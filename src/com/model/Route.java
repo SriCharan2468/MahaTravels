@@ -3,75 +3,107 @@ package com.model;
 import java.time.LocalDate;
 
 public class Route {
-    private Integer routeId;
+    private int routeId;
     private String source;
     private String destination;
     private LocalDate journeyDate;
     private double ticketPricePerPassenger;
-    private Integer noOfSeatsAvailable;
+    private int noOfSeatsAvailable;
+    private String type;
+    
+    
+	public Route(int routeId, String source, String destination, LocalDate journeyDate, double ticketPricePerPassenger,
+			int noOfSeatsAvailable, String type) {
+		super();
+		this.routeId = routeId;
+		this.source = source;
+		this.destination = destination;
+		this.journeyDate = journeyDate;
+		this.ticketPricePerPassenger = ticketPricePerPassenger;
+		this.noOfSeatsAvailable = noOfSeatsAvailable;
+		this.type = type;
+	}
 
-    public Route(Integer routeId, String source, String destination, LocalDate journeyDate, double ticketPrice, Integer noOfSeatsAvailable) {
-        this.routeId = routeId;
-        this.source = source;
-        this.destination = destination;
-        this.journeyDate = journeyDate;
-        this.ticketPricePerPassenger = ticketPrice;
-        this.noOfSeatsAvailable = noOfSeatsAvailable;
-    }
 
-	public Integer getRouteId() {
+	public int getRouteId() {
 		return routeId;
 	}
 
-	public void setRouteId(Integer routeId) {
+
+	public void setRouteId(int routeId) {
 		this.routeId = routeId;
 	}
+
 
 	public String getSource() {
 		return source;
 	}
 
+
 	public void setSource(String source) {
 		this.source = source;
 	}
+
 
 	public String getDestination() {
 		return destination;
 	}
 
+
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
+
 
 	public LocalDate getJourneyDate() {
 		return journeyDate;
 	}
 
+
 	public void setJourneyDate(LocalDate journeyDate) {
 		this.journeyDate = journeyDate;
 	}
+
 
 	public double getTicketPricePerPassenger() {
 		return ticketPricePerPassenger;
 	}
 
+
 	public void setTicketPricePerPassenger(double ticketPricePerPassenger) {
 		this.ticketPricePerPassenger = ticketPricePerPassenger;
 	}
 
-	public Integer getNoOfSeatsAvailable() {
+
+	public int getNoOfSeatsAvailable() {
 		return noOfSeatsAvailable;
 	}
 
-	public void setNoOfSeatsAvailable(Integer noOfSeatsAvailable) {
+
+	public void setNoOfSeatsAvailable(int noOfSeatsAvailable) {
 		this.noOfSeatsAvailable = noOfSeatsAvailable;
 	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Route [routeId=" + routeId + ", source=" + source + ", destination=" + destination + ", journeyDate="
 				+ journeyDate + ", ticketPricePerPassenger=" + ticketPricePerPassenger + ", noOfSeatsAvailable="
-				+ noOfSeatsAvailable + "]";
+				+ noOfSeatsAvailable + ", type=" + type + "]";
 	}
+	
+	
+
+    
 
 }

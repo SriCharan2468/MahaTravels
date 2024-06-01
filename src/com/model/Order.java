@@ -1,15 +1,17 @@
 package com.model;
 //Represents a booking order with details like order ID, the associated route, journey plan, order amount, and status.
 public class Order {
-    private Integer orderId;
+    private int orderId;
     private Route route;
     private Journey requestedJourneyPlan;
     private Double orderAmount;
     private String orderStatus;
-	public Integer getOrderId() {
+    
+    
+	public int getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 	public Route getRoute() {

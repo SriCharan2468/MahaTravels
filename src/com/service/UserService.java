@@ -15,25 +15,28 @@ public class UserService {
     	}
     	public void registerNewAdmin() {
     	    Scanner scanner = new Scanner(System.in);
-    	    System.out.println("\nNew Admin User Registration");
+    	    System.out.println("\n----- New Admin User Registration -----");
 
-    	    System.out.print("Enter first name: ");
-    	    String firstName = scanner.nextLine();
+    	    System.out.print("Enter Name: ");
+    	    String name = scanner.nextLine();
 
-    	    System.out.print("Enter last name: ");
-    	    String lastName = scanner.nextLine();
-
-    	    System.out.print("Enter mobile number: ");
+    	    System.out.print("Enter Mobile number: ");
     	    String mobileNumber = scanner.nextLine();
 
-    	    System.out.print("Enter gender: ");
+    	    System.out.print("Enter Gender: ");
     	    String gender = scanner.nextLine();
 
-    	    System.out.print("Enter email: ");
+    	    System.out.print("Enter E-mail: ");
     	    String email = scanner.nextLine();
 
-    	    System.out.print("Enter password: ");
+    	    System.out.print("Enter Password: ");
     	    String password = scanner.nextLine();
+    	    
+    	    try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
     	   
     	    if (isUserExists(email)) {
@@ -41,9 +44,9 @@ public class UserService {
     	        return;
     	    }
 
-    	    User newUser = new User(firstName, lastName, mobileNumber, gender, email, password, 0, "Active");
+    	    User newUser = new User(name,mobileNumber, gender, email, password, 0, "Active");
     	    users.add(newUser);
-    	    System.out.println("Registration successful!");
+    	    System.out.println("***** Registration successful! *****");
     	}
 
     	private boolean isUserExists(String email) {
@@ -58,13 +61,19 @@ public class UserService {
     	
     	public User login() {
     	    Scanner scanner = new Scanner(System.in);
-    	    System.out.println("\n User Login");
+    	    System.out.println("\n----- User Login -----");
 
-    	    System.out.print("Enter email: ");
+    	    System.out.print("Enter E-mail: ");
     	    String email = scanner.nextLine();
 
-    	    System.out.print("Enter password: ");
+    	    System.out.print("Enter Password: ");
     	    String password = scanner.nextLine();
+    	    
+    	    try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
     	    for (User user : users) {
     	        if (user.getEmail().equals(email)) {
@@ -74,7 +83,7 @@ public class UserService {
     	                return null;
     	            }
     	            if (user.getPassword().equals(password)) {
-    	                System.out.println("\n Login Successful");
+    	                System.out.println("\n***** Login Successful *****");
     	                userInvalidLoginAttempt.put(email, 0); // Reset count after successful login
     	                return user;
     	            } else {

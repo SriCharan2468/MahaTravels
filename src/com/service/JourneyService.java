@@ -21,7 +21,11 @@ public class JourneyService {
 
         public void planJourney() {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("\n Plan Journey");
+            System.out.println("\n----- Plan Journey -----");
+            
+            System.out.println("Sources Available :: Nellore, Hyderabad, Chennai, Bangalore");
+            System.out.println("Destinations Available :: Nellore, Hyderabad, Chennai, Bangalore");
+
 
             // Getting journey details from the user
             System.out.print("Enter source: ");
@@ -37,6 +41,12 @@ public class JourneyService {
             System.out.print("Enter number of passengers: ");
             int noOfPassengers = scanner.nextInt();
             scanner.nextLine(); // Consume the leftover newline
+            
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
             // Finding matching routes
             List<Route> matchingRoutes = getRoutes(source, destination, journeyDate, noOfPassengers);
@@ -49,18 +59,29 @@ public class JourneyService {
                 int routeNumber = scanner.nextInt();
                 Route selectedRoute = matchingRoutes.get(routeNumber - 1);
                 
+                try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+                
                 // Creating an order
                 Order newOrder = createOrder(journeyDate, noOfPassengers, selectedRoute);
                 orders.add(newOrder);
                 System.out.println("Journey planned successfully. Order details: " + newOrder);
             } else {
+            	try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
                 System.out.println("No available routes found for the given details.");
             }
         }
 
         public void reScheduleJourney() {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("\nRe-Schedule Journey");
+            System.out.println("\n----- Re-Schedule Journey -----");
 
             System.out.print("Enter your Order ID: ");
             int orderId = scanner.nextInt();
@@ -78,15 +99,30 @@ public class JourneyService {
                                                         orderToReschedule.getRoute().getDestination(), 
                                                         newDate, 
                                                         orderToReschedule.getRequestedJourneyPlan().getNumberOfPassengers());
+                try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 
                 if (!availableRoutes.isEmpty()) {
                     // Update the journey date
                     orderToReschedule.getRequestedJourneyPlan().setJourneyDate(newDate);
                     System.out.println("Journey rescheduled successfully. Updated order details: " + orderToReschedule);
                 } else {
+                	try {
+    					Thread.sleep(1000);
+    				} catch (InterruptedException e) {
+    					e.printStackTrace();
+    				}
                     System.out.println("No available routes for the new journey date.");
                 }
             } else {
+            	try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
                 System.out.println("Order not found.");
             }
         }
@@ -110,12 +146,7 @@ public class JourneyService {
             Order newOrder = new Order();
             double bookingCost = selectedRoute.getTicketPricePerPassenger() * passengers;
 
-            // Adding surge pricing for weekends
-            if (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                bookingCost += 200; // Weekend surge
-                bookingCost += bookingCost * 0.1; // Adding 10% GST
-            }
-
+            
             newOrder.setOrderAmount(bookingCost);
             newOrder.setRoute(selectedRoute);
             newOrder.setRequestedJourneyPlan(new Journey(date, passengers)); // Assuming Journey constructor takes date and passengers

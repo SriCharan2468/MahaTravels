@@ -1,8 +1,7 @@
 package com.model;
 //Represents an admin user with properties like name, email, password, mobile number, gender, failed login count, and account status.
 public class User {
-    private String firstName;
-    private String lastName;
+    private String name;
     private String mobileNumber;
     private String gender;
     private String email;
@@ -10,9 +9,8 @@ public class User {
     private int failedCount;
     private String accountStatus;
 
-    public User(String firstName, String lastName, String mobileNumber, String gender, String email, String password, int failedCount, String accountStatus) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String name, String mobileNumber, String gender, String email, String password, int failedCount, String accountStatus) {
+        this.name = name;
         this.mobileNumber = mobileNumber;
         this.gender = gender;
         this.email = email;
@@ -21,20 +19,12 @@ public class User {
         this.accountStatus = accountStatus;
     }
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setFirstName(String name) {
+		this.name = name;
 	}
 
 	public String getMobileNumber() {
@@ -87,9 +77,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", mobileNumber=" + mobileNumber
-				+ ", gender=" + gender + ", email=" + email + ", password=" + password + ", failedCount=" + failedCount
-				+ ", accountStatus=" + accountStatus + "]";
+		return "User [Name=" + name + ", MobileNumber=" + mobileNumber
+				+ ", Gender=" + gender + ", E-mail=" + email + ", Password=" + password + ", failedCount=" + failedCount
+				+ ", AccountStatus=" + accountStatus + "]";
 	}
 
     
