@@ -39,11 +39,14 @@ public class Order {
 		this.orderStatus = orderStatus;
 	}
 	
+	
+	
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", route=" + route + ", requestedJourneyPlan=" + requestedJourneyPlan
-				+ ", orderAmount=" + orderAmount + ", orderStatus=" + orderStatus + "]";
+		return "Order [orderId=" + orderId + ", \nroute=" + route + ", \nrequestedJourneyPlan=" + requestedJourneyPlan
+				+ ", \norderAmount=" + orderAmount + ", orderStatus=" + orderStatus + "]";
 	}
+	
 	
 
     

@@ -95,14 +95,14 @@ public class Route {
 	}
 
 
+	
 	@Override
 	public String toString() {
 		return "Route [routeId=" + routeId + ", source=" + source + ", destination=" + destination + ", journeyDate="
-				+ journeyDate + ", ticketPricePerPassenger=" + ticketPricePerPassenger + ", noOfSeatsAvailable="
+				+ journeyDate + ", \n	ticketPricePerPassenger=" + ticketPricePerPassenger + ", noOfSeatsAvailable="
 				+ noOfSeatsAvailable + ", type=" + type + "]";
 	}
-	
-	
+		
 
     
 

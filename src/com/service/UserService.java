@@ -32,12 +32,6 @@ public class UserService {
     	    System.out.print("Enter Password: ");
     	    String password = scanner.nextLine();
     	    
-    	    try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
     	   
     	    if (isUserExists(email)) {
     	        System.out.println("User with this email: " + email + " already exists");
@@ -69,11 +63,6 @@ public class UserService {
     	    System.out.print("Enter Password: ");
     	    String password = scanner.nextLine();
     	    
-    	    try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 
     	    for (User user : users) {
     	        if (user.getEmail().equals(email)) {

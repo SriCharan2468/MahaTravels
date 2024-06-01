@@ -22,10 +22,11 @@ public class JourneyService {
         public void planJourney() {
             Scanner scanner = new Scanner(System.in);
             System.out.println("\n----- Plan Journey -----");
+            System.out.println();
             
             System.out.println("Sources Available :: Nellore, Hyderabad, Chennai, Bangalore");
             System.out.println("Destinations Available :: Nellore, Hyderabad, Chennai, Bangalore");
-
+            System.out.println();
 
             // Getting journey details from the user
             System.out.print("Enter source: ");
@@ -41,6 +42,8 @@ public class JourneyService {
             System.out.print("Enter number of passengers: ");
             int noOfPassengers = scanner.nextInt();
             scanner.nextLine(); // Consume the leftover newline
+            
+            System.out.println("Please Wait, Searching for routes...");
             
             try {
 				Thread.sleep(1000);
@@ -68,7 +71,9 @@ public class JourneyService {
                 // Creating an order
                 Order newOrder = createOrder(journeyDate, noOfPassengers, selectedRoute);
                 orders.add(newOrder);
-                System.out.println("Journey planned successfully. Order details: " + newOrder);
+                System.out.println("Journey planned successfully..!");
+                System.out.println("Order Details :: ");
+                System.out.println(newOrder);
             } else {
             	try {
 					Thread.sleep(1000);
@@ -99,30 +104,19 @@ public class JourneyService {
                                                         orderToReschedule.getRoute().getDestination(), 
                                                         newDate, 
                                                         orderToReschedule.getRequestedJourneyPlan().getNumberOfPassengers());
-                try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
+                
                 if (!availableRoutes.isEmpty()) {
                     // Update the journey date
                     orderToReschedule.getRequestedJourneyPlan().setJourneyDate(newDate);
-                    System.out.println("Journey rescheduled successfully. Updated order details: " + orderToReschedule);
+                    System.out.println("Journey rescheduled successfully..!");
+                    System.out.println("Updated Order Details :: ");
+                    System.out.println(orderToReschedule);
                 } else {
-                	try {
-    					Thread.sleep(1000);
-    				} catch (InterruptedException e) {
-    					e.printStackTrace();
-    				}
+                	
                     System.out.println("No available routes for the new journey date.");
                 }
             } else {
-            	try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+            	
                 System.out.println("Order not found.");
             }
         }
