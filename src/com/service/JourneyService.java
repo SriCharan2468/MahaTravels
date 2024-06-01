@@ -75,11 +75,6 @@ public class JourneyService {
                 System.out.println("Order Details :: ");
                 System.out.println(newOrder);
             } else {
-            	try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
                 System.out.println("No available routes found for the given details.");
             }
         }
