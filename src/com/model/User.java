@@ -77,9 +77,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [Name=" + name + ", MobileNumber=" + mobileNumber
-				+ ", Gender=" + gender + ", E-mail=" + email + ", Password=" + password + ", failedCount=" + failedCount
-				+ ", AccountStatus=" + accountStatus + "]";
+		String result = "User Details::\n  Name: "+name+"\n  MobileNumber: "+mobileNumber+"\n  Gender: "+gender+"\n  E-mail: "+email+"\n  Password: "+password+"\n  Failed Count: "+failedCount+"\n  Account Status: "+accountStatus;
+		return result;
 	}
 
     

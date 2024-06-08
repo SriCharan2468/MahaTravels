@@ -43,8 +43,8 @@ public class Order {
 	
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", \nroute=" + route + ", \nrequestedJourneyPlan=" + requestedJourneyPlan
-				+ ", \norderAmount=" + orderAmount + ", orderStatus=" + orderStatus + "]";
+		String result = "  \tOrderId: "+orderId+"\n\t"+route+"\n  \tJourney Plan: "+requestedJourneyPlan+"\n  \tOrder Amount: "+orderAmount+"\n  \tOrder Status: "+orderStatus;
+		return result;
 	}
 	
 	

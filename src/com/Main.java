@@ -40,10 +40,10 @@ public class Main {
 			while ((line = reader.readLine()) != null) {
 				System.out.println(line);
 			}
-			return true; // Logo loaded successfully
+			return true;
 		} catch (IOException e) {
 			System.err.println("Error reading company logo file: " + e.getMessage());
-			return false; // Logo loading failed
+			return false;
 		}
 	}
 	
@@ -69,8 +69,9 @@ public class Main {
 	                System.out.println("2. Change booking date");
 	                System.out.println("3. Display User Details");
 	                System.out.println("4. Update User Details");
-	                System.out.println("5. Logout");
-	                System.out.println("6. Exit");
+	                System.out.println("5. Display Planned Journeys");
+	                System.out.println("6. Logout");
+	                System.out.println("7. Exit");
 	            }
 	        }
 
@@ -84,7 +85,6 @@ public class Main {
 	                } else if (loggedInUser == null) {
 	                    loggedInUser = userService.login();
 	                } else {
-	                    // Add logic for booking tickets
 	                    journeyService.planJourney();
 	                }
 	                break;
@@ -95,8 +95,7 @@ public class Main {
 	                } else if (loggedInUser == null) {
 	                    userService.registerNewAdmin();
 	                } else {
-	                    journeyService.reScheduleJourney();
-	                    // Add logic for changing booking date
+	                    journeyService.reScheduleJourney(scanner);
 	                }
 	                break;
 	            case 3:
@@ -116,13 +115,20 @@ public class Main {
 	                break;
 	            case 5:
 	                if (loggedInUser != null) {
-	                    loggedInUser = null; // Logout by resetting loggedInUser
+	                    journeyService.displayPlannedJourneys();
+	                } else {
+	                    System.out.println("Please login first to display planned journeys.");
+	                }
+	                break;
+	            case 6:
+	                if (loggedInUser != null) {
+	                    loggedInUser = null;
 	                    System.out.println("Logged out successfully.");
 	                } else {
 	                    System.out.println("You are not logged in.");
 	                }
 	                break;
-	            case 6:
+	            case 7:
 	                System.out.println("Exiting...");
 	                running = false;
 	                break;
@@ -135,80 +141,6 @@ public class Main {
 	    scanner.close();
 	}
 
-
-	private static void showOptions() {
-		Scanner scanner = new Scanner(System.in);
-		int choice;
-		boolean running = true;
-		boolean isUserRegistered = false;
-		User loggedInUser = null;
-
-		while (running) {
-			System.out.println("\nMenu Options:");
-			if (!isUserRegistered) {
-				System.out.println("1. New Admin User Registration");
-				System.out.println("2. Exit");
-			} else {
-				if (loggedInUser == null) {
-					System.out.println("1. Login");
-					System.out.println("2. Exit");
-				} else {
-					System.out.println("1. Book tickets");
-					System.out.println("2. Change booking date");
-					System.out.println("3. Display User Details");
-					System.out.println("4. Update User Details");
-					System.out.println("5. Exit");
-				}
-			}
-
-			System.out.print("Enter your choice: ");
-			choice = Integer.parseInt(scanner.nextLine());
-			switch (choice) {
-			case 1:
-				if (!isUserRegistered) {
-					userService.registerNewAdmin();
-					isUserRegistered = true;
-				} else if (loggedInUser == null) {
-					loggedInUser = userService.login();
-				} else {
-					// Add logic for booking tickets
-					journeyService.planJourney();
-				}
-				break;
-			case 2:
-				if (!isUserRegistered || loggedInUser == null) {
-					System.out.println("Exiting...");
-					running = false;
-				} else {
-					journeyService.reScheduleJourney();
-					// Add logic for changing booking date
-				}
-				break;
-			case 3:
-				if (loggedInUser != null) {
-					userService.displayUserDetails(loggedInUser);
-				} else {
-					System.out.println("Please login first to view user details.");
-				}
-				break;
-			case 4:
-				if (loggedInUser != null) {
-					userService.updateUserDetails(loggedInUser);
-				} else {
-					System.out.println("Please login first to update user details.");
-				}
-				break;
-			case 5:
-				System.out.println("Exiting...");
-				running = false;
-				break;
-			default:
-				System.out.println("Invalid choice. Please enter a correct option.");
-				break;
-			}
-		}
-
-		scanner.close();
-	}
-
+	
+	
 }

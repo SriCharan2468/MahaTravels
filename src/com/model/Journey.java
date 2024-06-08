@@ -29,8 +29,8 @@ public class Journey {
 
 	@Override
 	public String toString() {
-		String result= "";
-		return "Journey [journeyDate=" + journeyDate + ", numberOfPassengers=" + numberOfPassengers + "]";
+		String result= "\tJourneyDate: "+journeyDate+"\n\t\t\tNo. of Passengers: "+numberOfPassengers;
+		return result;
 	}
 
 }

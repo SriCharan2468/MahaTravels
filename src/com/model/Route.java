@@ -98,9 +98,8 @@ public class Route {
 	
 	@Override
 	public String toString() {
-		return "Route [routeId=" + routeId + ", source=" + source + ", destination=" + destination + ", journeyDate="
-				+ journeyDate + ", \n	ticketPricePerPassenger=" + ticketPricePerPassenger + ", noOfSeatsAvailable="
-				+ noOfSeatsAvailable + ", type=" + type + "]";
+		String result = "Route Details::\n  \t\tRoute Id: "+routeId+"\n  \t\tSource: "+source+"\n  \t\tDestination: "+destination+"\n  \t\tJourney Date: "+journeyDate+"\n  \t\tTicket Price Per Passenger: "+ticketPricePerPassenger+"\n  \t\tNo. of Seats Available: "+noOfSeatsAvailable+"\n  \t\tBus Type: "+type;
+		return result;
 	}
 		
 
