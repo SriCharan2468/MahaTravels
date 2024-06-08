@@ -29,6 +29,7 @@ public class Journey {
 
 	@Override
 	public String toString() {
+		String result= "";
 		return "Journey [journeyDate=" + journeyDate + ", numberOfPassengers=" + numberOfPassengers + "]";
 	}
 

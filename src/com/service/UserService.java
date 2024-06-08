@@ -51,7 +51,6 @@ public class UserService {
     	    }
     	    return false;
     	}
-
     	
     	public User login() {
     	    Scanner scanner = new Scanner(System.in);
@@ -65,7 +64,7 @@ public class UserService {
     	    
 
     	    for (User user : users) {
-    	        if (user.getEmail().equals(email)) {
+    	        if (user.getEmail().equalsIgnoreCase(email)) {
     	            Integer existingCount = userInvalidLoginAttempt.getOrDefault(email, 0);
     	            if (existingCount >= 5) {
     	                System.out.println("User account is locked due to multiple invalid login attempts.");
@@ -73,17 +72,55 @@ public class UserService {
     	            }
     	            if (user.getPassword().equals(password)) {
     	                System.out.println("\n***** Login Successful *****");
+    	                System.out.println("Welcome "+user.getName());
     	                userInvalidLoginAttempt.put(email, 0); // Reset count after successful login
     	                return user;
     	            } else {
     	                userInvalidLoginAttempt.put(email, existingCount + 1);
     	                System.out.println("\n Invalid Credentials. Attempt: " + (existingCount + 1) + " for email: " + email);
-    	       
+    	                return null; // Exit the method if password is incorrect
     	            }
     	        }
     	    }
     	    System.out.println("No user found with email: " + email);
     	    return null;
     	}
+
+
+    	
+    	public void displayUserDetails(User user) {
+    	    if (user != null) {
+    	        System.out.println("\n----- User Details -----");
+    	        System.out.println("Name: " + user.getName());
+    	        System.out.println("Email: " + user.getEmail());
+    	        System.out.println("Mobile Number: " + user.getMobileNumber());
+    	    } else {
+    	        System.out.println("No user found.");
+    	    }
     	}
+    	
+    	public void updateUserDetails(User loggedInUser) {
+    	    Scanner scanner = new Scanner(System.in);
+    	    System.out.println("\n----- Update User Details -----");
+
+    	    System.out.println("Logged-in User: " + loggedInUser.getName());
+
+    	    System.out.print("Enter New Name: ");
+    	    String newName = scanner.nextLine();
+    	    loggedInUser.setName(newName);
+
+    	    System.out.print("Enter New Mobile Number: ");
+    	    String newMobileNumber = scanner.nextLine();
+    	    loggedInUser.setMobileNumber(newMobileNumber);
+
+    	    System.out.print("Enter New Password: ");
+    	    String newPassword = scanner.nextLine();
+    	    loggedInUser.setPassword(newPassword);
+
+    	    System.out.println("User details updated successfully!");
+    	}
+
+
+
+   }
 
