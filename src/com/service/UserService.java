@@ -64,49 +64,6 @@ public class UserService {
 		System.out.println("***** Registration successful! *****");
 	}
 
-	public void registerNewAdmin1() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("\n----- New Admin User Registration -----");
-
-		System.out.print("Enter Name: ");
-		String name = scanner.nextLine();
-		if (!isNotEmpty(name)) {
-			System.out.println("Name cannot be empty.");
-			return;
-		}
-
-		System.out.print("Enter Mobile number: ");
-		String mobileNumber = scanner.nextLine();
-		if (!isValidMobileNumber(mobileNumber)) {
-			System.out.println("Invalid mobile number. It must be exactly 10 digits long.");
-			return;
-		}
-
-		System.out.print("Enter E-mail: ");
-		String email = scanner.nextLine();
-		if (!isValidEmail(email)) {
-			System.out.println("Invalid email format.");
-			return;
-		}
-
-		System.out.print("Enter Password: ");
-		String password = scanner.nextLine();
-		if (!isValidPassword(password)) {
-			System.out.println(
-					"Password must be at least 8 characters long and contain at least one digit, one uppercase letter, and one special character.");
-			return;
-		}
-
-		if (isUserExists(email)) {
-			System.out.println("User with this email: " + email + " already exists");
-			return;
-		}
-
-		User newUser = new User(name, mobileNumber, email, password, 0, "Active");
-		users.add(newUser);
-		System.out.println("***** Registration successful! *****");
-	}
-
 	private boolean isUserExists(String email) {
 		for (User user : users) {
 			if (user.getEmail().equals(email)) {
@@ -129,7 +86,7 @@ public class UserService {
 		for (User user : users) {
 			if (user.getEmail().equalsIgnoreCase(email)) {
 				Integer existingCount = userInvalidLoginAttempt.getOrDefault(email, 0);
-				if (existingCount >= 5) {
+				if (existingCount > 3) {
 					System.out.println("User account is locked due to multiple invalid login attempts.");
 					return null;
 				}
@@ -201,42 +158,8 @@ public class UserService {
 		System.out.println("User details updated successfully!");
 	}
 
-	public void updateUserDetails1(User loggedInUser) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("\n----- Update User Details -----");
-
-		System.out.println("Logged-in User: " + loggedInUser.getName());
-
-		System.out.print("Enter New Name: ");
-		String newName = scanner.nextLine();
-		if (!isNotEmpty(newName)) {
-			System.out.println("Name cannot be empty.");
-			return;
-		}
-		loggedInUser.setName(newName);
-
-		System.out.print("Enter New Mobile Number: ");
-		String newMobileNumber = scanner.nextLine();
-		if (!isValidMobileNumber(newMobileNumber)) {
-			System.out.println("Invalid mobile number. It must be exactly 10 digits long.");
-			return;
-		}
-		loggedInUser.setMobileNumber(newMobileNumber);
-
-		System.out.print("Enter New Password: ");
-		String newPassword = scanner.nextLine();
-		if (!isValidPassword(newPassword)) {
-			System.out.println(
-					"Password must be at least 8 characters long and contain at least one digit, one uppercase letter, and one special character.");
-			return;
-		}
-		loggedInUser.setPassword(newPassword);
-
-		System.out.println("User details updated successfully!");
-	}
-
 	private boolean isValidEmail(String email) {
-		String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+		String emailRegex = "^[a-zA-Z0-9_\\-\\.]+@[a-zA-Z]+\\.(com|in)$";
 		return email.matches(emailRegex);
 	}
 
