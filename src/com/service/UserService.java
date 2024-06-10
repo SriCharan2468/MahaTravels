@@ -19,27 +19,90 @@ public class UserService {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("\n----- New Admin User Registration -----");
 
+		String name;
+		do {
+			System.out.print("Enter Name: ");
+			name = scanner.nextLine();
+			if (!isNotEmpty(name)) {
+				System.out.println("Name cannot be empty.");
+			}
+		} while (!isNotEmpty(name));
+
+		String mobileNumber;
+		do {
+			System.out.print("Enter Mobile number: ");
+			mobileNumber = scanner.nextLine();
+			if (!isValidMobileNumber(mobileNumber)) {
+				System.out.println("Invalid mobile number. It must be exactly 10 digits long.");
+			}
+		} while (!isValidMobileNumber(mobileNumber));
+
+		String email;
+		do {
+			System.out.print("Enter E-mail: ");
+			email = scanner.nextLine();
+			if (!isValidEmail(email)) {
+				System.out.println("Invalid email format.");
+			} else if (isUserExists(email)) {
+				System.out.println("User with this email: " + email + " already exists");
+				email = null; // Set to null to continue loop
+			}
+		} while (!isValidEmail(email) || email == null);
+
+		String password;
+		do {
+			System.out.print("Enter Password: ");
+			password = scanner.nextLine();
+			if (!isValidPassword(password)) {
+				System.out.println(
+						"Password must be at least 8 characters long and contain at least one digit, one uppercase letter, and one special character.");
+			}
+		} while (!isValidPassword(password));
+
+		User newUser = new User(name, mobileNumber, email, password, 0, "Active");
+		users.add(newUser);
+		System.out.println("***** Registration successful! *****");
+	}
+
+	public void registerNewAdmin1() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("\n----- New Admin User Registration -----");
+
 		System.out.print("Enter Name: ");
 		String name = scanner.nextLine();
+		if (!isNotEmpty(name)) {
+			System.out.println("Name cannot be empty.");
+			return;
+		}
 
 		System.out.print("Enter Mobile number: ");
 		String mobileNumber = scanner.nextLine();
-
-		System.out.print("Enter Gender: ");
-		String gender = scanner.nextLine();
+		if (!isValidMobileNumber(mobileNumber)) {
+			System.out.println("Invalid mobile number. It must be exactly 10 digits long.");
+			return;
+		}
 
 		System.out.print("Enter E-mail: ");
 		String email = scanner.nextLine();
+		if (!isValidEmail(email)) {
+			System.out.println("Invalid email format.");
+			return;
+		}
 
 		System.out.print("Enter Password: ");
 		String password = scanner.nextLine();
+		if (!isValidPassword(password)) {
+			System.out.println(
+					"Password must be at least 8 characters long and contain at least one digit, one uppercase letter, and one special character.");
+			return;
+		}
 
 		if (isUserExists(email)) {
 			System.out.println("User with this email: " + email + " already exists");
 			return;
 		}
 
-		User newUser = new User(name, mobileNumber, gender, email, password, 0, "Active");
+		User newUser = new User(name, mobileNumber, email, password, 0, "Active");
 		users.add(newUser);
 		System.out.println("***** Registration successful! *****");
 	}
@@ -104,19 +167,91 @@ public class UserService {
 
 		System.out.println("Logged-in User: " + loggedInUser.getName());
 
+		String newName;
+		do {
+			System.out.print("Enter New Name: ");
+			newName = scanner.nextLine();
+			if (!isNotEmpty(newName)) {
+				System.out.println("Name cannot be empty.");
+			}
+		} while (!isNotEmpty(newName));
+		loggedInUser.setName(newName);
+
+		String newMobileNumber;
+		do {
+			System.out.print("Enter New Mobile Number: ");
+			newMobileNumber = scanner.nextLine();
+			if (!isValidMobileNumber(newMobileNumber)) {
+				System.out.println("Invalid mobile number. It must be exactly 10 digits long.");
+			}
+		} while (!isValidMobileNumber(newMobileNumber));
+		loggedInUser.setMobileNumber(newMobileNumber);
+
+		String newPassword;
+		do {
+			System.out.print("Enter New Password: ");
+			newPassword = scanner.nextLine();
+			if (!isValidPassword(newPassword)) {
+				System.out.println(
+						"Password must be at least 8 characters long and contain at least one digit, one uppercase letter, and one special character.");
+			}
+		} while (!isValidPassword(newPassword));
+		loggedInUser.setPassword(newPassword);
+
+		System.out.println("User details updated successfully!");
+	}
+
+	public void updateUserDetails1(User loggedInUser) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("\n----- Update User Details -----");
+
+		System.out.println("Logged-in User: " + loggedInUser.getName());
+
 		System.out.print("Enter New Name: ");
 		String newName = scanner.nextLine();
+		if (!isNotEmpty(newName)) {
+			System.out.println("Name cannot be empty.");
+			return;
+		}
 		loggedInUser.setName(newName);
 
 		System.out.print("Enter New Mobile Number: ");
 		String newMobileNumber = scanner.nextLine();
+		if (!isValidMobileNumber(newMobileNumber)) {
+			System.out.println("Invalid mobile number. It must be exactly 10 digits long.");
+			return;
+		}
 		loggedInUser.setMobileNumber(newMobileNumber);
 
 		System.out.print("Enter New Password: ");
 		String newPassword = scanner.nextLine();
+		if (!isValidPassword(newPassword)) {
+			System.out.println(
+					"Password must be at least 8 characters long and contain at least one digit, one uppercase letter, and one special character.");
+			return;
+		}
 		loggedInUser.setPassword(newPassword);
 
 		System.out.println("User details updated successfully!");
+	}
+
+	private boolean isValidEmail(String email) {
+		String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+		return email.matches(emailRegex);
+	}
+
+	private boolean isValidPassword(String password) {
+		String passwordRegex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+		return password.matches(passwordRegex);
+	}
+
+	private boolean isValidMobileNumber(String mobileNumber) {
+		String mobileNumberRegex = "^\\d{10}$";
+		return mobileNumber.matches(mobileNumberRegex);
+	}
+
+	private boolean isNotEmpty(String field) {
+		return field != null && !field.trim().isEmpty();
 	}
 
 }

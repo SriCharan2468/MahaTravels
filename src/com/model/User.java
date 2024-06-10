@@ -1,23 +1,23 @@
 package com.model;
+
 //Represents an admin user with properties like name, email, password, mobile number, gender, failed login count, and account status.
 public class User {
-    private String name;
-    private String mobileNumber;
-    private String gender;
-    private String email;
-    private String password;
-    private int failedCount;
-    private String accountStatus;
+	private String name;
+	private String mobileNumber;
+	private String email;
+	private String password;
+	private int failedCount;
+	private String accountStatus;
 
-    public User(String name, String mobileNumber, String gender, String email, String password, int failedCount, String accountStatus) {
-        this.name = name;
-        this.mobileNumber = mobileNumber;
-        this.gender = gender;
-        this.email = email;
-        this.password = password;
-        this.failedCount = failedCount;
-        this.accountStatus = accountStatus;
-    }
+	public User(String name, String mobileNumber, String email, String password, int failedCount,
+			String accountStatus) {
+		this.name = name;
+		this.mobileNumber = mobileNumber;
+		this.email = email;
+		this.password = password;
+		this.failedCount = failedCount;
+		this.accountStatus = accountStatus;
+	}
 
 	public String getName() {
 		return name;
@@ -33,14 +33,6 @@ public class User {
 
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 
 	public String getEmail() {
@@ -77,9 +69,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		String result = "User Details::\n  Name: "+name+"\n  MobileNumber: "+mobileNumber+"\n  Gender: "+gender+"\n  E-mail: "+email+"\n  Password: "+password+"\n  Failed Count: "+failedCount+"\n  Account Status: "+accountStatus;
+		String result = "User Details::\n  Name: " + name + "\n  MobileNumber: " + mobileNumber + "\n  E-mail: " + email
+				+ "\n  Password: " + password + "\n  Failed Count: " + failedCount + "\n  Account Status: "
+				+ accountStatus;
 		return result;
 	}
 
-    
 }

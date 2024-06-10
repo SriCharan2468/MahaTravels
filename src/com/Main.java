@@ -46,101 +46,99 @@ public class Main {
 			return false;
 		}
 	}
-	
+
 	private static void showMenuOptions() {
-	    Scanner scanner = new Scanner(System.in);
-	    int choice;
-	    boolean running = true;
-	    boolean isUserRegistered = false;
-	    User loggedInUser = null;
+		Scanner scanner = new Scanner(System.in);
+		int choice;
+		boolean running = true;
+		boolean isUserRegistered = false;
+		User loggedInUser = null;
 
-	    while (running) {
-	        System.out.println("\nMenu Options:");
-	        if (!isUserRegistered) {
-	            System.out.println("1. New Admin User Registration");
-	            System.out.println("2. Exit");
-	        } else {
-	            if (loggedInUser == null) {
-	                System.out.println("1. Login");
-	                System.out.println("2. Register another Admin User");
-	                System.out.println("3. Exit");
-	            } else {
-	                System.out.println("1. Book tickets");
-	                System.out.println("2. Change booking date");
-	                System.out.println("3. Display User Details");
-	                System.out.println("4. Update User Details");
-	                System.out.println("5. Display Planned Journeys");
-	                System.out.println("6. Logout");
-	                System.out.println("7. Exit");
-	            }
-	        }
+		while (running) {
+			System.out.println("\nMenu Options:");
+			if (!isUserRegistered) {
+				System.out.println("1. New Admin User Registration");
+				System.out.println("2. Exit");
+			} else {
+				if (loggedInUser == null) {
+					System.out.println("1. Login");
+					System.out.println("2. Register another Admin User");
+					System.out.println("3. Exit");
+				} else {
+					System.out.println("1. Book tickets");
+					System.out.println("2. Change booking date");
+					System.out.println("3. Display User Details");
+					System.out.println("4. Update User Details");
+					System.out.println("5. Display Planned Journeys");
+					System.out.println("6. Logout");
+					System.out.println("7. Exit");
+				}
+			}
 
-	        System.out.print("Enter your choice: ");
-	        choice = Integer.parseInt(scanner.nextLine());
-	        switch (choice) {
-	            case 1:
-	                if (!isUserRegistered) {
-	                    userService.registerNewAdmin();
-	                    isUserRegistered = true;
-	                } else if (loggedInUser == null) {
-	                    loggedInUser = userService.login();
-	                } else {
-	                    journeyService.planJourney();
-	                }
-	                break;
-	            case 2:
-	                if (!isUserRegistered) {
-	                    System.out.println("Exiting...");
-	                    running = false;
-	                } else if (loggedInUser == null) {
-	                    userService.registerNewAdmin();
-	                } else {
-	                    journeyService.reScheduleJourney(scanner);
-	                }
-	                break;
-	            case 3:
-	                if (loggedInUser == null) {
-	                    System.out.println("Exiting...");
-	                    running = false;
-	                } else if (loggedInUser != null) {
-	                    userService.displayUserDetails(loggedInUser);
-	                }
-	                break;
-	            case 4:
-	                if (loggedInUser != null) {
-	                    userService.updateUserDetails(loggedInUser);
-	                } else {
-	                    System.out.println("Please login first to update user details.");
-	                }
-	                break;
-	            case 5:
-	                if (loggedInUser != null) {
-	                    journeyService.displayPlannedJourneys();
-	                } else {
-	                    System.out.println("Please login first to display planned journeys.");
-	                }
-	                break;
-	            case 6:
-	                if (loggedInUser != null) {
-	                    loggedInUser = null;
-	                    System.out.println("Logged out successfully.");
-	                } else {
-	                    System.out.println("You are not logged in.");
-	                }
-	                break;
-	            case 7:
-	                System.out.println("Exiting...");
-	                running = false;
-	                break;
-	            default:
-	                System.out.println("Invalid choice. Please enter a correct option.");
-	                break;
-	        }
-	    }
+			System.out.print("Enter your choice: ");
+			choice = Integer.parseInt(scanner.nextLine());
+			switch (choice) {
+			case 1:
+				if (!isUserRegistered) {
+					userService.registerNewAdmin();
+					isUserRegistered = true;
+				} else if (loggedInUser == null) {
+					loggedInUser = userService.login();
+				} else {
+					journeyService.planJourney();
+				}
+				break;
+			case 2:
+				if (!isUserRegistered) {
+					System.out.println("Exiting...");
+					running = false;
+				} else if (loggedInUser == null) {
+					userService.registerNewAdmin();
+				} else {
+					journeyService.reScheduleJourney(scanner);
+				}
+				break;
+			case 3:
+				if (loggedInUser == null) {
+					System.out.println("Exiting...");
+					running = false;
+				} else if (loggedInUser != null) {
+					userService.displayUserDetails(loggedInUser);
+				}
+				break;
+			case 4:
+				if (loggedInUser != null) {
+					userService.updateUserDetails(loggedInUser);
+				} else {
+					System.out.println("Please login first to update user details.");
+				}
+				break;
+			case 5:
+				if (loggedInUser != null) {
+					journeyService.displayPlannedJourneys();
+				} else {
+					System.out.println("Please login first to display planned journeys.");
+				}
+				break;
+			case 6:
+				if (loggedInUser != null) {
+					loggedInUser = null;
+					System.out.println("Logged out successfully.");
+				} else {
+					System.out.println("You are not logged in.");
+				}
+				break;
+			case 7:
+				System.out.println("Exiting...");
+				running = false;
+				break;
+			default:
+				System.out.println("Invalid choice. Please enter a correct option.");
+				break;
+			}
+		}
 
-	    scanner.close();
+		scanner.close();
 	}
 
-	
-	
 }

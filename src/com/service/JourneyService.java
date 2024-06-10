@@ -68,6 +68,8 @@ public class JourneyService {
 			orders.add(newOrder);
 			selectedRoute.setNoOfSeatsAvailable(selectedRoute.getNoOfSeatsAvailable() - noOfPassengers);
 			System.out.println("Journey planned successfully..!");
+			System.out.println(
+					"Payment of Rs." + newOrder.getOrderAmount() + "/- Should be made while boarding the Bus..!");
 			System.out.println("Order Details :: ");
 			System.out.println(newOrder);
 		} else {
